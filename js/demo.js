@@ -101,3 +101,34 @@
     jungle.call(ninjia2, 1, 2, 3.4);
     console.log(ninjia1.result);
     console.log(ninjia2.result);
+
+    // 在回调中强制指定函数上下文
+
+    function forEach(list,callback){
+        for (let n = 0; n < list.length; n++) {
+            callback.call(list[n],n);
+        }
+    }
+    
+    var weapons = ['shuiran','kaitue','nunchucks'];
+    
+   forEach(
+       weapons,
+       function (index) {
+           if (this == weapons[index]) {
+               console.log(weapons[index]);
+           }
+       }
+   );
+
+function makeAdder(x) {
+    return function(y) {
+    return x + y;
+    };
+}
+
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+
+console.log(add5(2));  // 7
+console.log(add10(2)); // 12
